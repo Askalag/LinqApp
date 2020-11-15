@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using LinqApp.Comparator;
 using LinqApp.Generator;
+using LinqApp.Model;
 
 namespace LinqApp
 {
@@ -11,6 +13,8 @@ namespace LinqApp
         {
             var collectionInt = GenerateInt(50);
             var collectionObj = GenerateObj(50);
+            var collectionObj2 = GenerateObj(23);
+            var mergedCollection = collectionObj.Concat(collectionObj2).ToList();
             
             var resT = from i in collectionInt
                 orderby i descending 
@@ -33,7 +37,15 @@ namespace LinqApp
             var resF = from obj in collectionObj
                 group obj by obj.Id;
 
-            Console.WriteLine("--");
+            // union unique
+            var resA = collectionObj.Union(collectionObj2, new ObjComparator()).ToList();
+            // except
+            var resB = collectionObj.Except(collectionObj2, new ObjComparator()).ToList();
+            // repeatable elements by name property
+            var resD = mergedCollection.GroupBy(i => i.Name).SelectMany(grp => grp.Skip(1)).ToList();
+            var resL = resD.Max(i => i.Count);
+            
+            Console.WriteLine("-- Debug --");
         }
 
         private static List<int> GenerateInt(int amount)

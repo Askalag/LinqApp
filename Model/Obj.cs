@@ -1,4 +1,4 @@
-﻿namespace LinqApp.Generator
+﻿namespace LinqApp.Model
 {
     public class Obj
     {
