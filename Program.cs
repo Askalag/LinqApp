@@ -48,7 +48,7 @@ namespace LinqApp
             var resL = resD.Max(i => i.Count);
 
             var c = new C();
-            c.Calc("abcg");
+            c.Calc("test");
             
             Console.WriteLine("-- Debug --");
         }
