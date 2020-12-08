@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using LinqApp.Comparator;
+using LinqApp.Extension;
 using LinqApp.Generator;
 using LinqApp.Model;
 
@@ -44,6 +46,9 @@ namespace LinqApp
             // repeatable elements by name property
             var resD = mergedCollection.GroupBy(i => i.Name).SelectMany(grp => grp.Skip(1)).ToList();
             var resL = resD.Max(i => i.Count);
+
+            var c = new C();
+            c.Calc("abcg");
             
             Console.WriteLine("-- Debug --");
         }
